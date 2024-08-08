@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Social</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .profile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center;     /* Center content horizontally */
+            text-align: center;
+            background-color: #f1f1f1;
+            height: 200px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        .profile:nth-child(even) {
+            background-color: #f29cec;
+        }
+        .profile:hover {
+            background-color: #d0d7dd;
+        }
+        .profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .username {
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+        }
+        .email {
+            margin-bottom: 5px;
+            color: #6c757d;
+            font-size: 1em;
+        }
+        .follow-button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s;
+        }
+        .follow-button:hover {
+            background-color: #0056b3;
+        }
+        .follow-button:active {
+            background-color: #004085;
+        }
+    </style>
+</head>
+<body> 
+    <div style="margin-top: 30px;">
+        {% for user in user_data %}
+            {% if user.name and user.email %}
+                <div class="profile">
+                    <div class="username">{{ user.name }}</div>
+                    <div class="email">{{ user.email }}</div>
+                    <button class="follow-button">Follow</button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>

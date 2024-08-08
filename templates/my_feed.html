@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Feed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-rF79UGJ8CX5RjV5Nczk8v2vTp49epYWMyr/XSHxhJiEtFN4x+oS+ig==" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background: url('../static/bg1.jpg');
+            background-size: auto;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .post {
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(50% - 20px);
+            flex: 1 1 calc(50% - 20px); 
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .post-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .post-header .author {
+            font-weight: bold;
+        }
+        .post-content {
+            margin-bottom: 10px;
+        }
+        .post-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        .post-actions button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        .post-actions button span {
+            margin-left: 5px;
+        }
+        .post-actions .liked {
+            color: red;
+        }
+        button {
+            background-color: #f7f9f9; 
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .profile-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            background-color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 70px;
+            font-size: 24px;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            transition: transform 0.2s ease-in-out;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+        .profile-button:hover {
+            transform: scale(1.1);
+        }
+        .profile-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 80%; 
+            max-height: 80%; 
+        }
+        .profile-button:nth-child(1) {
+            animation-delay: 0s;
+            background-image: url("../static/pp2.jpg");
+            background-size: contain; /* Adjust image size */
+            background-repeat: no-repeat; /* Prevent repeating */
+            background-position: center; /* Center the background */
+        }
+        .profile-button:nth-child(2) {
+            animation-delay: 0.2s;
+            background-image:  url("../static/socialpage.png");
+            background-size: contain; /* Adjust image size */
+            background-repeat: no-repeat; /* Prevent repeating */
+            background-position: center; /* Center the background */
+        }
+        .profile-button:nth-child(3) {
+            animation-delay: 0.4s;
+            background-image: url("../static/ap4.png");
+            background-size: contain; /* Adjust image size */
+            background-repeat: no-repeat; /* Prevent repeating */
+            background-position: center; /* Center the background */
+        }
+        .profile-button:nth-child(4) {
+            animation-delay: 0.6s;
+            background-image: url("../static/youtube.jpg");
+            background-size: contain; /* Adjust image size */
+            background-repeat: no-repeat; /* Prevent repeating */
+            background-position: center; /* Center the background */
+        }
+        .profile-button:nth-child(5) {
+            animation-delay: 0.8s;
+            background-image: url("../static/cam2.jpg");
+            background-size: contain; /* Adjust image size */
+            background-repeat: no-repeat; /* Prevent repeating */
+            background-position: center; /* Center the background */
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="profile-button" style="top: 20px; right: 20px;" onclick="window.location.href = '{{ url_for('my_profile') }}'"></button>
+    
+    <button class="profile-button" style="top: 110px; right: 20px;" onclick="window.location.href = '{{ url_for('social') }}'"></button>
+    
+    <button class="profile-button" style="top: 200px; right: 20px;" onclick="window.location.href = '{{ url_for('add_post') }}'"></button>
+    
+    <button class="profile-button" style="top: 290px; right: 20px;" onclick="redirectToPage('https://www.youtube.com')"></button>
+
+    <button id="cameraButton" class="profile-button" style="top: 380px; right: 20px;" onclick="openCamera()"></button>
+
+    <div class="container">
+        <div class="post" data-post-id="1">
+            <div class="post-header">
+                <img src="{{ url_for('static', filename='fp2.jpg') }}" alt="Profile Picture">
+                <div class="author">Lebanen</div>
+            </div>
+            <div class="post-content">
+                Travel makes one modest. You see what a tiny place you occupy in the world — Gustave Flaubert
+            </div>
+            <img class="post-image" src="{{ url_for('static', filename='fp1.jpg') }}" alt="Post Image">
+            <div class="post-actions">
+                <button class="like-button"><span>&#x2764;</span> Like <span class="like-count">0</span></button>
+                <button><span>&#x1F4AC;</span> Comment</button>
+                <button><span>&#x1F4E5;</span> Share</button>
+            </div>
+        </div>
+
+        <div class="post" data-post-id="2">
+            <div class="post-header">
+                <img src="{{ url_for('static', filename='fp2.jpg') }}" alt="Profile Picture">
+                <div class="author">Lebanon</div>
+            </div>
+            <div class="post-content">
+                Nature is not a place to visit. It is home.
+            </div>
+            <img class="post-image" src="{{ url_for('static', filename='fp6.webp') }}" alt="Post Image">
+            <div class="post-actions">
+                <button class="like-button"><span>&#x2764;</span> Like <span class="like-count">0</span></button>
+                <button><span>&#x1F4AC;</span> Comment</button>
+                <button><span>&#x1F4E5;</span> Share</button>
+            </div>
+        </div>
+
+        <div class="post" data-post-id="3">
+            <div class="post-header">
+                <img src="{{ url_for('static', filename='fp3.jpg') }}" alt="Profile Picture">
+                <div class="author">Stefen</div>
+            </div>
+            <div class="post-content">
+                No caption needed. With my girls.
+            </div>
+            <img class="post-image" src="{{ url_for('static', filename='fp.webp') }}" alt="Post Image">
+            <div class="post-actions">
+                <button class="like-button"><span>&#x2764;</span> Like <span class="like-count">0</span></button>
+                <button><span>&#x1F4AC;</span> Comment</button>
+                <button><span>&#x1F4E5;</span> Share</button>
+            </div>
+        </div>
+
+        <div class="post" data-post-id="4">
+            <div class="post-header">
+                <img src="{{ url_for('static', filename='fp3.jpg') }}" alt="Profile Picture">
+                <div class="author">Stefen</div>
+            </div>
+            <div class="post-content">
+                SALES are here, GRAB it sooner.
+            </div>
+            <img class="post-image" src="{{ url_for('static', filename='fp7.webp') }}" alt="Post Image">
+            <div class="post-actions">
+                <button class="like-button"><span>&#x2764;</span> Like <span class="like-count">0</span></button>
+                <button><span>&#x1F4AC;</span> Comment</button>
+                <button><span>&#x1F4E5;</span> Share</button>
+            </div>
+        </div>
+
+        <div class="post" data-post-id="5">
+            <div class="post-header">
+                <img src="{{ url_for('static', filename='fp4.jpg') }}" alt="Profile Picture">
+                <div class="author">Libina</div>
+            </div>
+            <div class="post-content">
+                Cakeeeee that is!
+            </div>
+            <img class="post-image" src="{{ url_for('static', filename='fp11.jpg') }}" alt="Post Image">
+            <div class="post-actions">
+                <button class="like-button"><span>&#x2764;</span> Like <span class="like-count">0</span></button>
+                <button><span>&#x1F4AC;</span> Comment</button>
+                <button><span>&#x1F4E5;</span> Share</button>
+            </div>
+        </div>
+
+        <div class="post" data-post-id="6">
+            <div class="post-header">
+                <img src="{{ url_for('static', filename='fp4.jpg') }}" alt="Profile Picture">
+                <div class="author">Libina</div>
+            </div>
+            <div class="post-content">
+                This is photography!
+            </div>
+            <img class="post-image" src="{{ url_for('static', filename='fp9.jpg') }}" alt="Post Image">
+            <div class="post-actions">
+                <button class="like-button"><span>&#x2764;</span> Like <span class="like-count">0</span></button>
+                <button><span>&#x1F4AC;</span> Comment</button>
+                <button><span>&#x1F4E5;</span> Share</button>
+            </div>
+        </div>
+
+        <div class="post" data-post-id="7">
+            <div class="post-header">
+                <img src="{{ url_for('static', filename='fp5.jpg') }}" alt="Profile Picture">
+                <div class="author">Livingston</div>
+            </div>
+            <div class="post-content">
+                Have a piece of cake!
+            </div>
+            <img class="post-image" src="{{ url_for('static', filename='fp10.jpg') }}" alt="Post Image">
+            <div class="post-actions">
+                <button class="like-button"><span>&#x2764;</span> Like <span class="like-count">0</span></button>
+                <button><span>&#x1F4AC;</span> Comment</button>
+                <button><span>&#x1F4E5;</span> Share</button>
+            </div>
+        </div>
+
+        <div class="post" data-post-id="8">
+            <div class="post-header">
+                <img src="{{ url_for('static', filename='fp5.jpg') }}" alt="Profile Picture">
+                <div class="author">Livingston</div>
+            </div>
+            <div class="post-content">
+                Animals are the best creatures
+            <img class="post-image" src="{{ url_for('static', filename='fp8.jpg') }}" alt="Post Image">
+            <div class="post-actions">
+                <button class="like-button"><span>&#x2764;</span> Like <span class="like-count">0</span></button>
+                <button><span>&#x1F4AC;</span> Comment</button>
+                <button><span>&#x1F4E5;</span> Share</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function redirectToPage(page) {
+            window.location.href = page;
+        }
+        function openCamera() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    const videoElement = document.createElement('video');
+                    videoElement.srcObject = stream;
+                    videoElement.autoplay = true;
+                    videoElement.style.width = '100%';
+                    videoElement.style.height = '100%';
+                    document.body.appendChild(videoElement);
+                })
+                .catch(function(error) {
+                    console.error('Error accessing the camera:', error);
+                });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const likeCounts = JSON.parse(sessionStorage.getItem('likeCounts')) || {};
+            const likedPosts = JSON.parse(sessionStorage.getItem('likedPosts')) || {};
+            document.querySelectorAll('.post').forEach(post => {
+                const postId = post.getAttribute('data-post-id');
+                const likeCountSpan = post.querySelector('.like-count');
+                const likeButton = post.querySelector('.like-button');
+                if (likeCounts[postId]) {
+                    likeCountSpan.textContent = likeCounts[postId];
+                }
+                if (likedPosts[postId]) {
+                    likeButton.classList.add('liked');
+                }
+            });
+            document.querySelectorAll('.like-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const post = this.closest('.post');
+                    const postId = post.getAttribute('data-post-id');
+                    const likeCountSpan = post.querySelector('.like-count');
+                    let count = parseInt(likeCountSpan.textContent, 10);
+                    if (likedPosts[postId]) {
+                        return; 
+                    }
+                    count += 1;
+                    likeCountSpan.textContent = count;
+                    likeCounts[postId] = count;
+                    likedPosts[postId] = true;
+                    sessionStorage.setItem('likeCounts', JSON.stringify(likeCounts));
+                    sessionStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+                    this.classList.add('liked');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

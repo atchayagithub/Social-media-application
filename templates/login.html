@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Roboto;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url('../static/bg1.jpg'); /* Replace 'your-image-url.jpg' with the URL of your image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .center {
+            background: rgba(235, 231, 231, 0.8); /* Lighter background color with opacity */
+            border-radius: 10px;
+            box-shadow: 0px 0px 24px #5C5696;
+            padding: 30px;
+            box-sizing: border-box;
+            width: 360px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .center:hover {
+            transform: scale(1.05); /* Scale up on hover */
+        }
+
+        .center h1 {
+            text-align: center;
+            padding: 0 0 20px 0;
+            border-bottom: 1px solid silver;
+            color: #5D54A4; /* Darker text color */
+        }
+
+        .center form {
+            padding: 0 40px;
+            box-sizing: border-box;
+        }
+
+        form .txt_field {
+            position: relative;
+            border-bottom: 2px solid #adadad;
+            margin: 30px 0;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        form .txt_field:hover {
+            border-color: #2691d9; /* Change border color on hover */
+        }
+
+        .txt_field input {
+            width: 100%;
+            padding: 0 5px;
+            height: 40px;
+            font-size: 16px;
+            border: none;
+            background: none;
+            outline: none;
+            color: #07060e; /* Darker text color */
+            transition: color 0.3s ease-in-out;
+        }
+
+        .txt_field input:focus {
+            color: #1a1c1d; /* Change text color on focus */
+        }
+
+        .txt_field label {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            color: #adadad;
+            transform: translateY(-50%);
+            font-size: 16px;
+            pointer-events: none;
+            transition: top 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .txt_field input:focus ~ label,
+        .txt_field input:valid ~ label {
+            top: -5px;
+            color: #2691d9;
+        }
+
+        .txt_field span::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 0px;
+            height: 2px;
+            background: #2691d9;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .txt_field input:focus ~ span::before,
+        .txt_field input:Valid ~ span::before {
+            width: 100%;
+        }
+
+        input[type="Submit"] {
+            width: 100%;
+            height: 40px;
+            border: 1px solid;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            background: #2691d9;
+            color: #e9f4fb;
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        input[type="Submit"]:hover {
+            background: #5D54A4;
+            color: white;
+        }
+
+        button {
+            background-color: hwb(216 33% 29%);
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #5D54A4;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="center">
+            <h1>LOGIN</h1>
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="txt_field">
+                    <input id="email" type="email" name="email" required autocomplete="off">
+                    <span></span>
+                    <label>Email</label>
+                </div>
+                <div class="txt_field">
+                    <input id="password" type="password" name="password" required autocomplete="new-password">
+                    <label>Password</label>
+                </div>
+                <center><button type="submit">Sign up</button></center>
+                <br>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

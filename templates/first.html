@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('../static/bg1.jpg'); /* Replace 'bg1.jpg' with the name of your image file */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        h2 {
+            color: #732257;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-family: 'STCaiyun', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        #welcome {
+            text-align: center;
+            font-size: 4em;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        button {
+            background: linear-gradient(135deg, #ecf5f8, #eff5f8); 
+            color: #020916;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2em;
+            margin: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #6995c1, #5f7fcc); 
+            transform: scale(1.05); /* Scale up on hover */
+        }
+
+        button:active {
+            transform: scale(0.95); /* Scale down when clicked */
+        }
+    </style>
+</head>
+<body>
+    <h2 id="welcome">Welcome to Social Media</h2>
+    <button id="login" type="button" onclick="window.location.href = '{{ url_for('login') }}'">
+      Already have an account? Log in!
+    </button>
+    <button id="signup" type="button" onclick="window.location.href = '{{ url_for('signup') }}'">
+      New User? Sign up!
+    </button>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Profile Pic</title>
+  <style>
+    input[type="file"] {
+      color: transparent; /* Hide the text */
+    }
+  </style>
+</head>
+<body>
+  <h1>Add Profile Pic</h1>
+  <form action="/upload_profile_pic" method="post" enctype="multipart/form-data">
+    <label for="gallery">Choose from Gallery:</label>
+    <input type="file" id="gallery" name="gallery" accept="image/*">
+    <br>
+    <label for="camera">Take Photo:</label>
+    <input type="file" id="camera" name="camera" accept="image/*" capture="camera">
+    <br>
+    <input type="submit" value="Upload">
+  </form>
+</body>
+</html>

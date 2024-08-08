@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      background: linear-gradient(135deg, #71b7e6, #9b59b6);
+      background: url('../static/bg1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background-color: #fff;
+      padding: 25px 30px;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+      position: relative; /* Make the container relative */
+    }
+
+    .container .title {
+      font-size: 25px;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .container .title::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 30px;
+      border-radius: 5px;
+      background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    }
+
+    .content form .user-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 20px 0 12px 0;
+    }
+
+    form .user-details .input-box {
+      margin-bottom: 15px;
+      width: calc(100% / 2 - 20px);
+    }
+
+    form .input-box span.details {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .user-details .input-box input {
+      height: 45px;
+      width: 100%;
+      outline: none;
+      font-size: 16px;
+      border-radius: 5px;
+      padding-left: 15px;
+      border: 1px solid #ccc;
+      border-bottom-width: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .user-details .input-box input:focus,
+    .user-details .input-box input:valid {
+      border-color: #9b59b6;
+    }
+
+    .circle-button {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #9b59b6;
+      background-image: url('../static/pp.jpg');
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+    }
+
+    form .gender-details .gender-title {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    form .category {
+      display: flex;
+      width: 80%;
+      margin: 14px 0;
+      justify-content: space-between;
+    }
+
+    form .category label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    form .category label .dot {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      margin-right: 10px;
+      background: #d9d9d9;
+      border: 5px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    #dot-1:checked~.category label .one,
+    #dot-2:checked~.category label .two,
+    #dot-3:checked~.category label .three {
+      background: #9b59b6;
+      border-color: #d9d9d9;
+    }
+
+    form input[type="radio"] {
+      display: none;
+    }
+
+    form .button {
+      height: 45px;
+      margin: 35px 0
+    }
+
+    form .button input {
+      height: 100%;
+      width: 100%;
+      border-radius: 5px;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    }
+
+    form .button input:hover {
+      background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+    }
+
+    @media (max-width: 584px) {
+      .container {
+        max-width: 100%;
+      }
+
+      form .user-details .input-box {
+        margin-bottom: 15px;
+        width: 100%;
+      }
+
+      form .category {
+        width: 100%;
+      }
+
+      .content form .user-details {
+        max-height: 300px;
+        overflow-y: scroll;
+      }
+
+      .user-details::-webkit-scrollbar {
+        width: 5px;
+      }
+    }
+
+    @media (max-width: 459px) {
+      .container .content .category {
+        flex-direction: column;
+      }
+
+      .enable-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        background-color: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .enable-button:hover {
+        background-color: #0056b3;
+      }
+
+      .enable-button:after {
+        content: 'Enable';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 14px;
+      }
+    }
+
+    #username-availability {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      font-size: 20px;
+      display: inline-block;
+    }
+
+    #uname {
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">Create Account</div>
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="content">
+      <form id="registrationForm" method="POST" action="{{ url_for('create_account') }}">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input id="name" name="name" type="text" placeholder="Enter your name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Username</span>
+            <input id="uname" name="uname" type="text" placeholder="Enter your username" required>
+            <span id="username-availability"></span>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input id="email" name="email" type="email" placeholder="Enter your email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input id="phnno" name="phnno" type="text" placeholder="Enter your number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Date of Birth</span>
+            <input id="birthdate" type="date" name="birthdate" onchange="calculateAge(this.value)" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Age</span>
+            <input type="number" id="age" name="age" min="1" max="120" placeholder="Age" readonly required>
+          </div>
+          <!-- Circle Button for Profile Image -->
+          <div class="circle-button" id="profileButton"></div>
+          <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="updateProfileIcon(event)">
+        </div>
+        <div class="gender-details">
+          <input type="radio" name="gender" id="dot-1" value="Male">
+          <input type="radio" name="gender" id="dot-2" value="Female">
+          <input type="radio" name="gender" id="dot-3" value="PreferNotToSay">
+          <span class="gender-title">Gender</span>
+          <div class="category">
+            <label for="dot-1">
+              <span class="dot one"></span>
+              <span class="gender">Male</span>
+            </label>
+            <label for="dot-2">
+              <span class="dot two"></span>
+              <span class="gender">Female</span>
+            </label>
+            <label for="dot-3">
+              <span class="dot three"></span>
+              <span class="gender">Prefer not to say</span>
+            </label>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    function checkUsernameAvailability(username) {
+      fetch(`/check_username_availability/${username}`)
+        .then(response => response.json())
+        .then(data => {
+          if (!data.available) {
+            alert("Username already taken. Try another username.");
+          } else {
+            document.getElementById("username-availability").innerText = "";
+          }
+        });
+    }
+
+    document.getElementById("uname").addEventListener("blur", function () {
+      var username = this.value.trim();
+      if (username !== "") {
+        checkUsernameAvailability(username);
+      } else {
+        document.getElementById("username-availability").innerText = "";
+      }
+    });
+
+    document.getElementById("profileButton").addEventListener("click", function () {
+      document.getElementById("fileInput").click();
+    });
+
+    function updateProfileIcon(event) {
+      var reader = new FileReader();
+      reader.onload = function () {
+        document.getElementById("profileButton").style.backgroundImage = `url(${reader.result})`;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function calculateAge(birthdate) {
+      var today = new Date();
+      var dob = new Date(birthdate);
+      var age = today.getFullYear() - dob.getFullYear();
+      var m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      document.getElementById('age').value = age;
+    }
+
+    var form = document.getElementById('registrationForm');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      var name = document.getElementById('name').value;
+      var username = document.getElementById('uname').value;
+      var email = document.getElementById('email').value;
+      var phoneNumber = document.getElementById('phnno').value;
+      var birthdate = document.getElementById('birthdate').value;
+      var age = document.getElementById('age').value;
+      var gender = document.querySelector('input[name="gender"]:checked').value;
+
+      localStorage.setItem('name', name);
+      localStorage.setItem('username', username);
+      localStorage.setItem('email', email);
+      localStorage.setItem('phoneNumber', phoneNumber);
+      localStorage.setItem('birthdate', birthdate);
+      localStorage.setItem('age', age);
+      localStorage.setItem('gender', gender);
+
+      window.location.href = 'my_profile.html';
+    });
+  </script>
+</body>
+
+</html>
